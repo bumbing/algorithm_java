@@ -6,13 +6,9 @@ public class Solution {
     
     public int rob_helper(int[] nums, int head, int tail){
         if(head > tail)     return 0;
-        int[] result = new int[tail-head+1];
+        int[] result = new int[tail-head+2];
         for(int i=head; i<=tail; i++){
-            int index = i-head;
-            if(i==head){
-                result[index] = nums[i];
-                continue;
-            } 
+            int index = i-head+1;
             if(i==head+1){
                 result[index] = Math.max(nums[i], nums[i-1]);
                 continue;
