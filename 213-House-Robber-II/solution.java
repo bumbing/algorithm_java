@@ -7,11 +7,12 @@ public class Solution {
     public int rob_helper(int[] nums, int head, int tail){
         if(head > tail)     return 0;
         int[] result = new int[tail+1];
-        int index = 1;
+        int index = head;
         while(head <= tail){
             if(index==1)    result[index] = nums[head];
             else            result[index] = Math.max(result[index-1], result[index-2]+nums[head]);
             index++;
+            head++;
         }
         return result[result.length-1];
     }
