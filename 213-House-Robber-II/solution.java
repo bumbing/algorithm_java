@@ -9,10 +9,10 @@ public class Solution {
         int[] result = new int[tail-head+2];
         for(int i=head; i<=tail; i++){
             int index = i-head+1;
-            if(i==head+1){
-                result[index] = Math.max(nums[i], nums[i-1]);
+            if(i==head){
+                result[index] = nums[i];
                 continue;
-            }   
+            }
             result[index] = Math.max(result[index-1], result[index-2]+nums[i]);
             index++;
         }
