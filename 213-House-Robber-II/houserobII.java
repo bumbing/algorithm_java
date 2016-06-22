@@ -1,7 +1,7 @@
 public class Solution {
     public int rob(int[] nums) {
         if(nums.length==0)  return 0;
-        return Math.max(rob_helper(nums, 1, nums.length-1), rob_helper(2, nums.length-2) + nums[0]);
+        return Math.max(rob_helper(nums, 1, nums.length-1), rob_helper(nums, 2, nums.length-2) + nums[0]);
     }
     
     public int rob_helper(int[] nums, int head, int tail){
