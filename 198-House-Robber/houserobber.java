@@ -9,4 +9,5 @@ public class Solution {
             result[i] = Math.max(result[i-1], result[i-2]+nums[i]);
         }
         return result[nums.length-1];
+    }
 }
