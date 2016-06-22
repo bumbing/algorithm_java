@@ -5,7 +5,7 @@ public class Solution {
     }
     
     public int rob_helper(int[] nums, int head, int tail){
-        if(head < tail)     return 0;
+        if(head > tail)     return 0;
         if(head == tail)    return nums[tail];
         int[] result = new int[tail-head+1];
         int index=0;
