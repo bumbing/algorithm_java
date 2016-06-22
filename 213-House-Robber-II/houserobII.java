@@ -15,6 +15,6 @@ public class Solution {
             else    result[index] = Math.max(result[index-1], result[index-2]+nums[i]);
             index++;
         }
-        return result[index];
+        return result[index-1];
     }
 }
