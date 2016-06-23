@@ -9,6 +9,6 @@ public class Solution {
                 for(int j=1; j<=tmp; j++)   result[i] = Math.min(result[i], result[i-j*j]+1);
             }
         }
-        return result[n.length];
+        return result[n];
     }
 }
