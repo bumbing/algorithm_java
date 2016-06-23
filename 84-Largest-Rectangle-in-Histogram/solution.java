@@ -6,14 +6,12 @@ public class Solution {
         for(int i=0; i<=heights.length; i++){
             while(!list.isEmpty()){
                 int tmp = list.get(list.size()-1);
-                if (heights[i] < height[tmp] || i == heights.length){
-                    result = Math.max(result, height[tmp]*(i-tmp));
+                if (i == heights.length || heights[i] < heights[tmp]){
+                    result = Math.max(result, heights[tmp]*(i-tmp));
                     list.remove(list.size()-1);
-                } else {
-                    list.add(i);
-                    break;
                 }
             }
+            list.add(i);
         }
         return result;
     }
