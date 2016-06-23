@@ -9,9 +9,13 @@ public class Solution {
                 if (i == heights.length || heights[i] < heights[tmp]){
                     result = Math.max(result, heights[tmp]*(i-tmp));
                     list.remove(list.size()-1);
+                } else if(heights[i] == heights[tmp]){
+                    break;
+                } else {
+                    list.add(i);
+                    braek;
                 }
             }
-            list.add(i);
         }
         return result;
     }
