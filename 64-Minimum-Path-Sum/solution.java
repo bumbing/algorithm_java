@@ -5,12 +5,10 @@ public class Solution {
         int[] result = new int[grid[0].length];
         for(int i=0; i<grid.length; i++){
             for(int j=0; j<grid[0].length; j++){
-                if(i==0 && j==0){
-                    result[j] = grid[i][j];
+                if(j==0){
+                    result[j] = result[j] + grid[i][j];
                 }else if(i==0){
                     result[j] = result[j-1] + grid[i][j];
-                }else if(j==0){
-                    result[j] = result[j] + grid[i][j];
                 }else{
                     result[j] = Math.min(result[j], result[j-1]) + grid[i][j];
                 }
