@@ -1,7 +1,7 @@
 public class Solution {
     public int numSquares(int n) {
-        int[] result = new int[n.length];
-        for(int i=1; i<=n.length; i++){
+        int[] result = new int[n + 1];
+        for(int i=1; i<=n; i++){
             int tmp = Math.sqrt(n);
             if(n == tmp * tmp){
                 result[i] = 1;
