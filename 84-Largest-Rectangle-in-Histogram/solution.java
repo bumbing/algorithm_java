@@ -5,7 +5,10 @@ public class Solution {
         ArrayList<Integer> hist = new ArrayList<>();
         for(int i=0; i<heights.length; i++){
             while(!hist.isEmpty() && heights[hist.get(hist.size()-1)]>heights[i]){
-                result = Math.max(result, heights[hist.get(hist.size()-1)] * (hist.get(hist.size()-1) - (hist.size()==1)?(-1):hist.get(hist.size()-2)));
+                int temp;
+                if(hist.size()==1)  temp = -1;
+                else    temp = hist.get(hist.size()-2);
+                result = Math.max(result, heights[hist.get(hist.size()-1)] * (hist.get(hist.size()-1) - temp);
                 hist.remove(hist.size()-1);
             }
             if(hist.isEmpty() || heights[hist.get(hist.size()-1)]<heights[i])   hist.add(i);
