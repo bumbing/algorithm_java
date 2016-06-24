@@ -8,7 +8,8 @@ public class Solution {
                 int temp;
                 if(hist.size()==1)  temp = -1;
                 else    temp = hist.get(hist.size()-2);
-                result = Math.max(result, heights[hist.get(hist.size()-1)] * (hist.get(hist.size()-1) - temp);
+                int temp2 = hist.get(hist.size()-1);
+                result = Math.max(result, heights[temp2] * (temp2 - temp);
                 hist.remove(hist.size()-1);
             }
             if(hist.isEmpty() || heights[hist.get(hist.size()-1)]<heights[i])   hist.add(i);
