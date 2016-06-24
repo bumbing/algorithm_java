@@ -21,11 +21,11 @@ public class Solution {
                 if(i==0 && j==0){
                     result[i][j] = temp;
                 }else if(i==0){
-                    result[i][j] = (ca1[i]=='*') | (ca2[j]='*') | (temp&(result[i][j-1] & ca2[j-1]=='*'));
+                    result[i][j] = (ca1[i]=='*') || (ca2[j]='*') || (temp&(result[i][j-1] & ca2[j-1]=='*'));
                 }else if(j==0){
-                    result[i][j] = (ca1[i]=='*') | (ca2[j]='*') | (temp&(result[i-1][j] & ca1[i-1]=='*'));
+                    result[i][j] = (ca1[i]=='*') || (ca2[j]='*') || (temp&(result[i-1][j] & ca1[i-1]=='*'));
                 }else{
-                    result[i][j] = (ca1[i]=='*') | (ca2[j]='*') | temp&((result[i][j-1] & ca2[j-1]=='*')|(result[i-1][j] & ca1[i-1]=='*')|result[i-1][j-1]);
+                    result[i][j] = (ca1[i]=='*') || (ca2[j]='*') || temp&((result[i][j-1] & ca2[j-1]=='*')|(result[i-1][j] & ca1[i-1]=='*')|result[i-1][j-1]);
                 }
             }
         }
