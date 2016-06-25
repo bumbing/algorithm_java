@@ -1,24 +1,31 @@
 public class Solution {
     public int largestRectangleArea(int[] heights) {
         int result = 0;
-        if(heights.length==0)   return result;
-        ArrayList<Integer> hist = new ArrayList<>();
+        Stack<Integer> nums = new Stack();
         for(int i=0; i<heights.length; i++){
-            while(!hist.isEmpty() && heights[hist.get(hist.size()-1)]>heights[i]){
-                int temp;
-                if(hist.size()==1)  temp = -1;
-                else    temp = hist.get(hist.size()-2);
-                int temp2 = hist.get(hist.size()-1);
-                result = Math.max(result, heights[temp2] * (temp2 - temp);
-                hist.remove(hist.size()-1);
+            result = Math.max(result, addLast(nums, i, heights[i], heights));
+        }
+        result = Math.max(result, addLast(nums, heights.length, 0, heights));
+        return result;
+    }
+    
+    private int addLast(Stack<Integer> nums, int index, int height, int[] heights){
+        int result = 0;
+        while(true){
+            if(nums.isEmpty())  break;
+            int tmp = heights[nums.get(nums.size()-1)];
+            if(tmp < height) break;
+            if(tmp == height){
+                nums.remove(nums.size()-1);
+                break;
             }
-            if(hist.isEmpty() || heights[hist.get(hist.size()-1)]<heights[i])   hist.add(i);
+            //calculate and remove the last one
+            int product = index;
+            product -= (nums.size()==1)?0:nums.get(nums.size()-2)+1; 
+            result = Math.max(result, tmp * product);
+            nums.remove(nums.size()-1);
         }
-        hist.add(0, -1);
-        while(hist.size()>1){
-            result = Math.max(result, heights[hist.get(hist.size()-1)] * (heights.length - 1 - hist.get(hist.size()-2)));
-            hist.remove(hist.size()-1);
-        }
+        nums.add(index);
         return result;
     }
 }
