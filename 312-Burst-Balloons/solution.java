@@ -16,7 +16,7 @@ public class Solution {
     private int helper(int head, int length){
         int tail = head+length;
         if(head>tail)   return 0;
-        if(result[i][tail]!=0)  return this.result[i][tail];
+        if(result[head][tail]!=0)  return this.result[head][tail];
         if(head==tail)  return this.numbers[head] * (head==0)?1:this.numbers[head-1] * (tail==this.numbers.length-1)?1:this.number[tail+1];
         int tmp = 0;
         for(int i=head; i<=tail; i++){
