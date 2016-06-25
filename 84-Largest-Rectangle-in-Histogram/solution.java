@@ -1,31 +1,28 @@
 public class Solution {
     public int largestRectangleArea(int[] heights) {
+        Stack<Integer> stack = new Stack();
         int result = 0;
-        Stack<Integer> nums = new Stack();
         for(int i=0; i<heights.length; i++){
-            result = Math.max(result, addLast(nums, i, heights[i], heights));
+            result = Math.max(add(stack, i, heights[i], heights), result);
         }
-        result = Math.max(result, addLast(nums, heights.length, 0, heights));
+        result = Math.max(add(stack, heights.length, 0, heights), result);
         return result;
     }
     
-    private int addLast(Stack<Integer> nums, int index, int height, int[] heights){
+    private int add(Stack<Integer> stack, int index, int height, int[] heights){
         int result = 0;
         while(true){
-            if(nums.isEmpty())  break;
-            int tmp = heights[nums.get(nums.size()-1)];
-            if(tmp < height) break;
-            if(tmp == height){
-                nums.remove(nums.size()-1);
+            if(stack.empty())   break;
+            if(heights[stack.peek()] < height)   break;
+            if(heights[stack.peek()] == height){
+                stack.pop();
                 break;
             }
-            //calculate and remove the last one
-            int product = index;
-            product -= (nums.size()==1)?0:nums.get(nums.size()-2)+1; 
-            result = Math.max(result, tmp * product);
-            nums.remove(nums.size()-1);
+            int product = heights[stack.pop()];
+            product *= index - (stack.empty()?0:(stack.peek()+1));
+            result = Math.max(product, result);
         }
-        nums.add(index);
+        stack.push(index);
         return result;
     }
 }
