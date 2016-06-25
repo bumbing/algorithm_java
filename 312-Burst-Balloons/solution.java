@@ -17,10 +17,10 @@ public class Solution {
         int tail = head+length;
         if(head>tail)   return 0;
         if(result[head][tail]!=0)  return this.result[head][tail];
-        if(head==tail)  return this.numbers[head] * ((head==0)?1:this.numbers[head-1]) * ((tail==this.numbers.length-1)?1:this.number[tail+1]);
+        if(head==tail)  return this.numbers[head] * ((head==0)?1:this.numbers[head-1]) * ((tail==this.numbers.length-1)?1:this.numbers[tail+1]);
         int tmp = 0;
         for(int i=head; i<=tail; i++){
-            tmp = Math.max(tmp, this.numbers[i] * (head==0)?1:this.numbers[i-1]) * (tail==this.numbers.length-1)?1:this.number[tail+1] + helper(head, i-1) + helper(i+1, tail);
+            tmp = Math.max(tmp, this.numbers[i] * (head==0)?1:this.numbers[i-1]) * (tail==this.numbers.length-1)?1:this.numbers[tail+1] + helper(head, i-1) + helper(i+1, tail);
         }
         return tmp;
     }
