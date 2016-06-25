@@ -1,26 +1,27 @@
 public class Solution {
+    int[] numbers;
+    int[][] result;
     public int maxCoins(int[] nums) {
         if(nums.length==0)  return 0;
-        int[][] result = new int[nums.length][nums.length];
+        this.numbers = nums;
+        this.result = new int[nums.length][nums.length];
         for(int l=0; l<nums.length; l++){
             for(int i=0; i<nums.length; i++){
-                if(i+l<nums.length)     helper(nums, result, i, l);
+                if(i+l<nums.length)     this.result[i][i+l] = helper(i, l);
             }
         }
         return result[0][nums.length-1];
     }
     
-    private void helper(int[] nums, int[][] result, int head, int length){
+    private int helper(int head, int length){
         int tail = head+length;
-        if(head>tail)   return;
-        if(head==tail){
-            nums[head][tail] = nums[head] * (head==0)?1:nums[head-1] * (head==nums.length-1)?1:nums[head+1];
-            return;
-        } 
-        if(result[head][tail]!=0)   return;
+        if(head>tail)   return 0;
+        if(result[i][tail]!=0)  return this.result[i][tail];
+        if(head==tail)  return this.numbers[head] * (head==0)?1:this.numbers[head-1] * (tail==this.numbers.length-1)?1:this.number[tail+1];
         int tmp = 0;
         for(int i=head; i<=tail; i++){
-            tmp = Math.max(tmp, result[head][i-1]+result[i+1][tail]+nums[i]*(head==0)?1:nums[head-1] *(tail==nums.length-1)?1:nums[head+1]);
+            tmp = Math.max(tmp, this.numbers[i] * (head==0)?1:this.numbers[i-1]) * (tail==this.numbers.length-1)?1:this.number[tail+1] + helper(head, i-1) + helper(i+1, tail);
         }
+        return tmp;
     }
 }
