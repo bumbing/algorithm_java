@@ -12,9 +12,12 @@ public class Solution {
     
     private void helper(int[] nums, int[][] result, int head, int length){
         int tail = head+length;
-        if(head>tail)   return 0;
-        if(head==tail)  return nums[head] * (head==0)?1:nums[head-1] * (head==nums.length-1)?1:nums[head+1];
-        if(result[head][tail]!=0)   return result[head][tail];
+        if(head>tail)   return;
+        if(head==tail){
+            nums[head][tail] = nums[head] * (head==0)?1:nums[head-1] * (head==nums.length-1)?1:nums[head+1];
+            return;
+        } 
+        if(result[head][tail]!=0)   return;
         int tmp = 0;
         for(int i=head; i<=tail; i++){
             tmp = Math.max(tmp, result[head][i-1]+result[i+1][tail]+nums[i]*(head==0)?1:nums[head-1] *(tail==nums.length-1)?1:nums[head+1]);
