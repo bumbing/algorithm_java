@@ -14,12 +14,7 @@ public class Solution {
         while(true){
             if(stack.empty())   break;
             if(heights[stack.peek()] < height)   break;
-            if(heights[stack.peek()] == height){
-                stack.pop();
-                break;
-            }
-            int product = heights[stack.pop()];
-            product *= index - (stack.empty()?0:(stack.peek()+1));
+            int product = heights[stack.pop()] * (index - (stack.empty()?0:(stack.peek()+1)));
             result = Math.max(product, result);
         }
         stack.push(index);
