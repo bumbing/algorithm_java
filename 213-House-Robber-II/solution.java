@@ -8,7 +8,7 @@ public class Solution {
         if(head > tail)     return 0;
         int[] result = new int[tail+1];
         while(head <= tail){
-            if(head==1)    result[head] = nums[head];
+            if(head==1)    result[head] = nums[head];  //Since head-2 is not valid when head=1
             else            result[head] = Math.max(result[head-1], result[head-2]+nums[head]);
             head++;
         }
