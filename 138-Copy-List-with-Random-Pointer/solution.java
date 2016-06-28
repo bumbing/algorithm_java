@@ -20,13 +20,17 @@ public class Solution {
                 map.put(temp1.next, head2.next);
             }
             
-            if(temp1.next.random != null){
-            if(map.containsKey(temp1.next.random) ){
-                head2.next.random = map.get(temp1.next.random);
-            }else{
-                head2.next.random = new RandomListNode(temp1.next.random.label);
-                map.put(temp1.next.random, head2.next.random);
-            }
+            if(temp1.next.random != null)
+            {
+                if(map.containsKey(temp1.next.random) )
+                {
+                    head2.next.random = map.get(temp1.next.random);
+                }
+                else
+                {
+                    head2.next.random = new RandomListNode(temp1.next.random.label);
+                    map.put(temp1.next.random, head2.next.random);
+                }
             }
             temp1 = temp1.next;
             head2 = head2.next;
