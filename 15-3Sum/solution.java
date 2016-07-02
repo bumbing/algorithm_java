@@ -1,53 +1,32 @@
 public class Solution {
-    public List<List<Integer>> threeSum(int[] num) {
-        //ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<List<Integer>>();
-        if(num.length<3)
-            return result;
-            
-        Arrays.sort(num);//sort the array to save hashmap space
-        
-        //Traverse all numbers
-        for(int i=0; i<num.length-2; ){
-            if(num[i]>0)  
-                break;
-            int j = i+1;
-            int k = num.length-1;
-            while(j<k){
-                if(num[i]+num[j]+num[k]==0){
-                    List<Integer> tmp = new ArrayList<>();
-                    tmp.add(num[i]);
-                    tmp.add(num[j]);
-                    tmp.add(num[k]);
-                    result.add(tmp);
-                    j=moveNext(j,num);
+        for(int i=0; i<nums.length-2; i++){
+            if(i>0 && nums[i] == nums[i-1])    continue;
+            int head = i+1, tail = nums.length-1;
+            while(head < tail){
+                int sum = nums[i] + nums[head] + nums[tail];
+                if(sum == 0){
+                    List<Integer> Array = new ArrayList<Integer>();
+                    Array.add(nums[i]);
+                    Array.add(nums[head]);
+                    Array.add(nums[tail]);
+                    result.add(Array);
+                    while(head < tail){
+                        if(nums[head] == nums[head+1])  head++;
+                        else{
+                            head++;
+                            break;
+                        }
+                    }
+                }else if(sum < 0){
+                    head++;
+                }else{
+                    tail--;
                 }
-                else if(num[i]+num[j]+num[k]<0) j=moveNext(j,num);
-                else{
-                    k = movePrevious(k,num);
-                }
-                
             }
-            i=moveNext(i,num);
         }
-        
         return result;
-    }
-    
-    private int moveNext(int i, int[] num){
-        while(i<num.length-1){
-            ++i;
-            if(num[i]!=num[i-1])
-                break;
-        }
-        return i;
-    }
-    private int movePrevious(int i, int[] num){
-        while(i>0){
-            --i;
-            if(num[i]!=num[i+1])
-                break;
-        }
-        return i;
     }
 }
