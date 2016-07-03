@@ -20,6 +20,8 @@ public class Solution {
                             break;
                         }
                     }
+                    
+                    //两个条件可以合并
                 }else if(sum < 0){
                     head++;
                 }else{
