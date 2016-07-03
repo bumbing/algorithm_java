@@ -30,6 +30,7 @@ public class Solution {
     }
     
     private ListNode reverse(ListNode head){
+        //要让第一个点的next指向null，否则死循环
         ListNode head1 = null;
         while(head != null){
             ListNode tmp = head.next;
