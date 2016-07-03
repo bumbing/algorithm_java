@@ -8,22 +8,21 @@
  * }
  */
 public class Solution {
-    //Hashmap
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
-        Stack<TreeNode> stack = new Stack<>();
-        Set<TreeNode> set = new HashSet<>();
-        if(root == null)    return result;
-        stack.push(root);
+        Stack<TreeNode> stack = new Stack();
+        TreeNode cur = root;
+        while(cur!=null){
+            stack.push(cur);
+            cur = cur.left;
+        }
         while(!stack.empty()){
-            TreeNode temp = stack.peek();
-            if(set.contains(temp)){
-                result.add(temp.val);
-                stack.pop();
-                if(temp.right != null)  stack.push(temp.right);
-            }else{
-                set.add(temp);
-                if(temp.left != null)   stack.push(temp.left);
+            cur = stack.pop();
+            result.add(cur.val);
+            cur = cur.right;
+            while(cur!=null){
+                stack.push(cur);
+                cur = cur.left;
             }
         }
         return result;
