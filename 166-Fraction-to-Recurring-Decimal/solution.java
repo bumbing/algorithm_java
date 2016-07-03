@@ -1,6 +1,7 @@
 public class Solution {
     public String fractionToDecimal(int numerator, int denominator) {
-        if(numerator == 0)  return Integer.toString(0);
+        //考点有 long to avoid overflow; 负号要在绝对值的除法前面加，^的用法；numerator=0的特殊情况
+        if(numerator == 0)  return "0";
         Map<Long, Integer> map = new HashMap<>();
         //The key is residue, value is index
         int index = 0;
