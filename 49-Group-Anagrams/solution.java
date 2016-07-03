@@ -12,7 +12,6 @@ public class Solution {
                 strings.add(str);
                 result.add(strings);
             }
-            
         }
         return result;
     }
@@ -21,5 +20,6 @@ public class Solution {
         char[] ar = str.toCharArray();
         Arrays.sort(ar);
         return String.valueOf(ar);
+        //这是考点，如果单纯用toString的话就不一样了
     }
 }
