@@ -9,11 +9,17 @@
  */
 public class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
+        List<Integer> result = new ArrayList<Integer>();
         if(root==null)  return result;
-        result.addAll(postorderTraversal(root.left));
-        result.addAll(postorderTraversal(root.right));
-        result.add(root.val);
+        Stack<TreeNode> stack = new Stack();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode cur = stack.pop();
+            if(cur.left!=null)  stack.push(cur.left);
+            if(cur.right!=null) stack.push(cur.right);
+            result.add(cur.val);
+        }
+        Collections.reverse(result);
         return result;
     }
 }
