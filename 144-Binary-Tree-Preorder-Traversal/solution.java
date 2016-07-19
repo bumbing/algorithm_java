@@ -9,16 +9,11 @@
  */
 public class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        List<Integer> result = new ArrayList<Integer>();
-        stack.push(root);
-        while(!stack.isEmpty()){
-            TreeNode cur = stack.pop();
-            if(cur == null) continue;
-            stack.push(cur.right);
-            stack.push(cur.left);
-            result.add(cur.val);
-        }
+        List<Integer> result = new ArrayList<>();
+        if(root==null)  return result;
+        else result.add(root.val);
+        result.addAll(preorderTraversal(root.left));
+        result.addAll(preorderTraversal(root.right));
         return result;
     }
 }
