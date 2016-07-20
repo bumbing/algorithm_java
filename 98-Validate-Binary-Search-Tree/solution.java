@@ -8,7 +8,7 @@
  * }
  */
 public class Solution {
-    public boolean isValidBST(TreeNode root) {
+     public boolean isValidBST(TreeNode root) {
         if(root == null)    return true;
         return helper(root, null, null);
     }
