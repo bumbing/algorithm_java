@@ -16,6 +16,4 @@ public class Solution {
         root.val = Math.max(left, right) + 1;
         return Math.abs(left-right) <= 1;
     }
-    
-    
 }
