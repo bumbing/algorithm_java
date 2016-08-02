@@ -25,11 +25,4 @@ public class Solution {
         }
         return null;
     }
-    
-    public TreeNode findMin(TreeNode root){
-        while(root.left!=null){
-            root = root.left;
-        }
-        return root;
-    }
 }
