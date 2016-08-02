@@ -12,14 +12,12 @@ public class Solution {
         Stack<TreeNode> stack = new Stack();
         TreeNode cur = root;
         while(cur!=null){
-            if(cur.val==p.val)  break;
             stack.push(cur);
             if(cur.val>p.val)  cur = cur.left;
             else cur = cur.right;
         }
-        if(cur.right!=null){
-            return findMin(cur.right);
-        }
+        cur = stack.pop();
+        if(cur.val!=p.val)  return cur;
         while(!stack.isEmpty()){
             TreeNode tmp = stack.peek();
             if(cur==tmp.left) return tmp;
