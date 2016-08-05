@@ -13,7 +13,7 @@ public class Solution {
             if(i>=k && arr.get(1).index==i-k)   arr.remove(1);
             while(arr.get(arr.size()-1).num<=nums[i])   arr.remove(arr.size()-1);
             arr.add(new Number(nums[i], i));
-            if(i>=k)    result[i-k]=arr.get(1).num;
+            if(i>=k-1)    result[i-k+1]=arr.get(1).num;
         }
         return result;
     }
