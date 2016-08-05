@@ -1,10 +1,10 @@
 public class Solution {
     public int nthUglyNumber(int n) {
-        Set<Long> traversed = new HashSet<>();
-        PriorityQueue<Long> pq = new PriorityQueue<>();
+        Set<Integer> traversed = new HashSet<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         int[] array = {2, 3, 5};
         pq.offer(1);
-        traversed.add(1l);
+        traversed.add(1);
         int count=0;
         while(count<n){
             count++;
