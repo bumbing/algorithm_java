@@ -1,41 +1,49 @@
 public class Solution {
-    class Node{
-        int val;
-        int rank=0;
-        Node left, right;
-        public Node(int x){ this.val = x;}
+    class SegmentTreeNode {
+        int start, end;
+        int num;
+        SegmentTreeNode ltree, rtree;
+        public SegmentTreeNode(int s, int e) {
+            start = s;
+            end = e;
+            num = 0;
+        }
     }
+    public SegmentTreeNode buildTree(int left, int right) {
+        SegmentTreeNode root = new SegmentTreeNode(left, right);
+        if (left != right) {
+            int mid = (left + right)/2;
+            root.ltree = buildTree(left, mid);
+            root.rtree = buildTree(mid+1, right);
+        }
+        return root;
+    }
+    
     public List<Integer> countSmaller(int[] nums) {
-        //BST
-        Node root = null;
         List<Integer> result = new ArrayList<>();
-        if(nums==null || nums.length==0)    return result;
+        if(nums==null || nums.length == 0)  return result;
+        SegmentTreeNode root = buildTree(0, nums.length-1);
+        int[] sortList = nums.clone();
+        Arrays.sort(sortList);
         for(int i=nums.length-1; i>=0; i--){
-            if(i==nums.length-1){
-                root = new Node(nums[i]);
-                result.add(0, 0);
-            }else
-            result.add(0, insert(root, nums[i]));
+            int index = Arrays.binarySearch(sortList, nums[i]);
+            result.add(0, query(root, index));
         }
         return result;
     }
     
-    public int insert(Node root, int val){
-        int smaller = 0;
-        Node temp;
+    public int query(SegmentTreeNode root, int index){
+        int result = 0;
         while(root!=null){
-            temp = root;
-            if(root.val>=val){
-                root.rank++;
-                root = root.left;
-            }   
-            else{
-                smaller += root.rank+1;
-                root = root.right;
+            if(index<=(root.start+root.end)/2){
+                root.num = root.num + 1;
+                root = root.ltree;
+            }else{
+                result += root.num;
+                root = root.rtree;
             }
         }
-        if(temp.val>=val) temp.left = new Node(val);
-        else temp.right = new Node(val);
-        return smaller;
+        return result;
     }
+    
 }
