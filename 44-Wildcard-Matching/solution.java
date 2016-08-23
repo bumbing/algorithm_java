@@ -1,39 +1,25 @@
 public class Solution {
     public boolean isMatch(String s, String p) {
-        if(s.length() == 0 || p.length() == 0){
-            if(s.length() == p.length())    return true;
-            else if(s.length() == 0){
-                for(int i=0; i<p.length(); i++)  if(p.charAt(i)!='*')   return false;
-                return true;
-            }else {
-                for(int i=0; i<s.length(); i++)  if(s.charAt(i)!='*')   return false;
-                return true;
-            }
+        if(s==null || p==null)  return false;
+        boolean[][] match = new boolean[s.length()+1][p.length()+1];
+        match[0][0] = true;
+        for(int i=0;i<p.length();i++){
+            if(p.charAt(i)!='*')
+                break;
+            else
+                match[0][i]=true;
         }
         
-        char[] ca1 = s.toCharArray();
-        char[] ca2 = p.toCharArray();
-        
-        boolean[][] result = new boolean[ca1.length][ca2.length];
-        for(int i=0; i<ca1.length; i++){
-            for(int j=0; j<ca2.length; j++){
-                boolean temp = compare(ca1[i], ca2[j]);
-                if(i==0 && j==0){
-                    result[i][j] = temp;
-                }else if(i==0){
-                    result[i][j] = (temp&(result[i][j-1] & (ca2[j-1]=='*'|ca1[i]=='*'));
-                }else if(j==0){
-                    result[i][j] = (temp&(result[i-1][j] & (ca1[i-1]=='*'|ca2[j]=='*'));
-                }else{
-                    result[i][j] = (temp&((result[i][j-1] & (ca2[j-1]=='*'|ca1[i]=='*'))|(result[i-1][j] & (ca1[i-1]=='*'|ca2[j]=='*'))|result[i-1][j-1]));
+        for(int i=0; i<s.length(); i++){
+            for(int j=0; j<p.length(); j++){
+                if(s.charAt(i)==p.charAt(j) || p.charAt(j)=='?')    match[i+1][j+1] = match[i][j];
+                else if(p.charAt(j)=='*'){
+                    match[i+1][j+1] = match[i+1][j] || match[i][j+1]; 
                 }
             }
         }
-        return result[ca1.length-1][ca2.length-1];
-    }
-    
-    private boolean compare(char a, char b){
-        if(a-b==0 || a=='*' || a=='?' || b=='*' || b=='?')    return true;
-        return false;
+        return match[s.length()][p.length()];
     }
 }
+
+
