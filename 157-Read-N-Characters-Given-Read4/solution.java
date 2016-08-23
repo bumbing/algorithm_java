@@ -8,6 +8,7 @@ public class Solution extends Reader4 {
      * @return    The number of characters read
      */
     public int read(char[] buf, int n) {
+        n = Math.min(n, buf.length);
         char[] temp = new char[4];
         int count = 0, index = 0;
         int leftChar = n;
@@ -16,7 +17,7 @@ public class Solution extends Reader4 {
             if(count==0){
                 if(eof) break;
                 count = read4(temp);
-                if(count==0)    eof=true;
+                if(count<4)    eof=true;
             }else{
                 buf[index] = temp[4-count];
                 count--;
