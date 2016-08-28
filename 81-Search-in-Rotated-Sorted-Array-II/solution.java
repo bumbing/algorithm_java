@@ -16,10 +16,10 @@ public class Solution {
                 else head = mid;
             }else{
                 if(target>nums[head]){
-                    if(nums[mid]>=nums[head] && target>nums[mid])    head = mid;
+                    if(nums[mid]>=nums[head] && target>nums[mid])    head = mid; //this '=' is a trick part
                     else   tail = mid;
                 } else if(target<nums[tail]){
-                    if(nums[mid]<=nums[tail] && target<nums[mid])    tail = mid;
+                    if(nums[mid]<=nums[tail] && target<nums[mid])    tail = mid;    // also here
                     else    head = mid;
                 } else
                     return false;
