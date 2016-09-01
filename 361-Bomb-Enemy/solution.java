@@ -25,10 +25,9 @@ public class Solution {
             cnt = 0;
             for(int i=0; i<=grid.length; i++){
                 if(i==grid.length || grid[i][j] == 'W'){
-                    while(head<i && cnt>0){
+                    while(head<i ){
                         result[head][j] += cnt;
-                        if(grid[head][j]=='E')  result[head][j]=0;
-                        max = Math.max(max, result[head][j]);
+                        if(grid[head][j]!='E')  max = Math.max(max, result[head][j]);
                         head++;
                     }
                     head = i+1;
