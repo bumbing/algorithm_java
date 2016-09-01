@@ -15,6 +15,7 @@ public class Solution {
             p1 = p1.next;
         }
         p2 = reverse(p1.next);
+        p1.next = null;//need to handle it point to null
         p1 = head;
         while(p1!=null && p2!=null){
             ListNode tmp = p1.next;
@@ -28,13 +29,14 @@ public class Solution {
     
     public ListNode reverse(ListNode head){
         if(head==null)  return head;
-        ListNode p1 = head.next;
-        while(p1!=null){
-            ListNode tmp = p1.next;
-            p1.next = head;
-            head = p1;
-            p1 = tmp;
+        ListNode p1 = null;
+        while(head!=null){
+            ListNode tmp = head.next;
+            head.next = p1;
+            p1 = head;
+            head = tmp;
         }
-        return head;
+        return p1;
+        //Need to point the tail(initially as head) to null pointer
     }
 }
