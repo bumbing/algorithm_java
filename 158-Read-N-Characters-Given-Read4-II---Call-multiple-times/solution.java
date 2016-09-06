@@ -19,8 +19,8 @@ public class Solution extends Reader4 {
                 n--;
             }else{
                 this.count = read4(this.temp);
-                if(this.count==0)   break;
                 this.head = 0;
+                if(this.count==0)   break;
             }
         }
         return result-n;
