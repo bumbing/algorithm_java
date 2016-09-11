@@ -32,11 +32,12 @@ public class RandomizedSet {
         array = this.array;
         if(!map.containsKey(val))  return false;
         Node temp = map.get(val);
-        map.remove(val);
         Node swap = array.get(array.size()-1);
         temp.val = swap.val;
-        map.put(swap.val, temp);
+        //Need to consider when the tail element is the one, swap it then delete original one
+        map.put(swap.val, temp);//Otherwise this might put it back
         array.remove(array.size()-1);
+        map.remove(val);
         return true;
     }
     
