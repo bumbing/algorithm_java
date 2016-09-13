@@ -1,47 +1,38 @@
 public class Solution {
-    class SegmentTreeNode {
-        int start, end;
-        int num;
-        SegmentTreeNode ltree, rtree;
-        public SegmentTreeNode(int s, int e) {
-            start = s;
-            end = e;
-            num = 0;
-        }
-    }
-    public SegmentTreeNode buildTree(int left, int right) {
-        SegmentTreeNode root = new SegmentTreeNode(left, right);
-        if (left != right) {
-            int mid = (left + right)/2;
-            root.ltree = buildTree(left, mid);
-            root.rtree = buildTree(mid+1, right);
-        }
-        return root;
-    }
-    
     public List<Integer> countSmaller(int[] nums) {
         List<Integer> result = new ArrayList<>();
-        if(nums==null || nums.length == 0)  return result;
-        SegmentTreeNode root = buildTree(0, nums.length-1);
-        int[] sortList = nums.clone();
-        Arrays.sort(sortList);
+        int[] rank = Arrays.copyOf(nums, nums.length), tree = new int[nums.length+1];
+        Arrays.sort(rank);
+        Map<Integer, Integer> map = new HashMap<>();
+        int pre = Integer.MIN_VALUE, smaller = 0;
+        for(int tmp: rank){
+            if(tmp != pre){
+                map.put(tmp, smaller);
+                pre = tmp;
+            }
+            smaller++;
+        }
         for(int i=nums.length-1; i>=0; i--){
-            int index = Arrays.binarySearch(sortList, nums[i]);
-            result.add(0, query(root, index));
+            int r = map.get(nums[i]);
+            //result.add(r>0?req(tree, r):0, 0);
+            //update(tree, r+1);
         }
         return result;
+        
     }
     
-    public int query(SegmentTreeNode root, int index){
+    public void update(int[] tree, int index){
+        while(index<tree.length){
+            tree[index] = tree[index]+1;
+            index += index & (index-1);
+        }
+    }
+    
+    public int req(int[] tree, int index){
         int result = 0;
-        while(root!=null){
-            if(index<=(root.start+root.end)/2){
-                root.num = root.num + 1;
-                root = root.ltree;
-            }else{
-                result += root.num;
-                root = root.rtree;
-            }
+        while(index>0){
+            result += tree[index];
+            index -= index & (index-1);
         }
         return result;
     }
